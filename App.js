@@ -1,23 +1,19 @@
-// Navigation.js
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "./screens/HomeScreen";
-import ContactsScreen from "./screens/ContactsScreen";
-import GalleryScreen from "./screens/GalleryScreen";
-const Stack = createStackNavigator();
+import React from 'react'
 
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen">
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="ContactsScreen" component={ContactsScreen} />
-        <Stack.Screen name="GalleryScreen" component={GalleryScreen} />
+import Cryptos from './src/Cryptos'
+import rootReducer from './reducers/index'
 
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+
+const store = createStore(rootReducer)
+
+export default class App extends React.Component {
+    render() {
+        return (
+            <Provider store={store} >
+                <Cryptos />
+            </Provider>
+        )
+    }
 }
-
-export default App;
